@@ -1,0 +1,35 @@
+# kpi-agent 設定ファイル例
+# このファイルを kpi.yml としてリポジトリルートに配置する
+
+# スキャン対象リポジトリ (省略時は GITHUB_REPOSITORY 環境変数を使用)
+# repo: owner/repo
+
+# ラベル名カスタマイズ (デフォルト値を示す)
+labels:
+  ux: ux
+  security: security
+  monetize: monetize
+  critical: critical
+  major: major
+
+# CI ワークフロー (省略時は全ワークフロー)
+# ci_workflow: ci.yml
+
+# KPI 目標値
+targets:
+  ci_green_rate: 0.95        # CI green 率目標 (95%)
+  critical_ttf_hours: 24     # CRITICAL Issue TTF 目標 (24時間)
+  major_ttf_days: 7          # MAJOR Issue TTF 目標 (7日)
+  ax_score: 0.8              # AX Score 目標 (80%)
+  deploy_success_rate: 1.0   # デプロイ成功率目標 (100%)
+  data_loss_per_month: 0     # データロス件数/月 目標 (0件)
+
+# 計測軸の有効/無効
+axes:
+  reliability: true
+  ux_quality: true
+  velocity: true
+  security_debt: true
+  ax_score: true
+  security_risk: true
+  monetize: true
