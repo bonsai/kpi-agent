@@ -1,10 +1,10 @@
 {
-  "name": "kpi-agent",
+  "name": "kpi-reporter",
   "version": "0.1.0",
   "description": "General-purpose KPI measurement agent for GitHub repositories",
   "type": "module",
   "bin": {
-    "kpi-agent": "./dist/index.js"
+    "kpi-reporter": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
