@@ -1,0 +1,39 @@
+{
+  "name": "kpi-reporter",
+  "version": "0.1.0",
+  "description": "General-purpose KPI measurement agent for GitHub repositories",
+  "type": "module",
+  "bin": {
+    "kpi-agent": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "scan": "tsx src/index.ts scan",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.0.0",
+    "commander": "^12.0.0",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.5.0"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": ["kpi", "github", "agent", "ci", "metrics"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bonsai/kpi-agent"
+  }
+}

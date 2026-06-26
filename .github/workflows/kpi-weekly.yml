@@ -1,0 +1,40 @@
+name: KPI Weekly Report
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'   # 毎週月曜 10:00 JST
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to comment on (optional)'
+        required: false
+        type: number
+
+jobs:
+  kpi-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install kpi-agent
+        run: npm install --global kpi-agent
+
+      - name: Run KPI scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          ARGS="scan --comment"
+          if [ -n "${{ inputs.issue_number }}" ]; then
+            ARGS="$ARGS --issue ${{ inputs.issue_number }}"
+          fi
+          kpi-agent $ARGS

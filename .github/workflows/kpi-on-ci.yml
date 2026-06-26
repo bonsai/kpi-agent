@@ -1,0 +1,31 @@
+name: KPI on CI Complete
+
+on:
+  workflow_run:
+    workflows: ['*']
+    types: [completed]
+
+jobs:
+  kpi-check:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'failure'
+    permissions:
+      issues: write
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install kpi-agent
+        run: npm install --global kpi-agent
+
+      - name: Run KPI scan on CI failure
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: kpi-agent scan --output markdown
