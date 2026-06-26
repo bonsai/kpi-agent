@@ -1,6 +1,39 @@
 # kpi-agent
 
+**General-purpose KPI measurement agent for GitHub repositories.**
+
+Automatically measures and reports **7 axes of KPIs** for any GitHub repository — reliability, UX quality, development velocity, security debt, agent efficiency (AX), security risk, and monetization ease. Helps teams make data-driven decisions about where to invest development time.
+
+---
+
+## 概要 (Overview)
+
+kpi-agent は GitHub リポジトリの健全性を **7 軸** で自動計測し、KPI スナップショットを生成する CLI エージェントです。
+
+- 🔴 **CRITICAL** な問題を検出して優先度付け
+- 🟡 悪化傾向を早期にキャッチ
+- 🟢 健全な軸への過剰投資を防止
+- ⚪ 未計測の軸を可視化
+
+---
+
 任意の GitHub リポジトリに対して **7 軸 KPI を自動計測・レポート**する汎用エージェント。
+
+### 7 Axes of KPI Measurement
+
+| Axis | English | Data Source | Green | Yellow | Red |
+|------|---------|-------------|-------|--------|-----|
+| 信頼性 | **Reliability** | CI workflow results | Green rate ≥ target | Within ±20% | Below target -20% |
+| 体験品質 | **UX Quality** | `ux`-labeled open Issues | 0 issues | Open issues exist | MAJOR issue exists |
+| 開発速度 | **Velocity** | Issue TTF median, CI green rate | TTF ≤ target | TTF ≤ target×2 | TTF > target×2 |
+| セキュリティ負債 | **Security Debt** | `security`-labeled CRITICAL/MAJOR | 0 issues | MAJOR exists | CRITICAL exists |
+| エージェント効率 | **AX Score** | Session logs | — | — | Not measured |
+| セキュリティリスク | **Security Risk** | Code secret pattern scanning | None detected | — | Detected |
+| マネタイズ容易性 | **Monetize Ease** | `monetize`-labeled blockers | 0 items | Items exist | — |
+
+Detailed thresholds and targets can be customized via `kpi.yml` configuration file.
+
+---
 
 ## なぜ KPI か — 判断の根拠として使う
 
